@@ -26,6 +26,7 @@ export async function selectPessoa(req, res){
 
 export async function insertPessoa(req, res){
     let pessoa = req.body;
+
     openDb().then(db=>{
         db.run('INSERT INTO Pessoa (nome, idade, horario) VALUES (?,?,?)', [pessoa.nome, pessoa.idade, pessoa.horario]);
     });
