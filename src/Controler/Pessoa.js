@@ -2,7 +2,7 @@ import { openDb } from '../configDB.js';
 
 export async function createTable(req, res){
     openDb().then(db=>{
-        db.exec('CREATE TABLE IF NOT EXISTS Pessoa ( id INTEGER PRIMARY KEY, nome TEXT, idade INTEGER, horario TEXT)') 
+        db.exec('CREATE TABLE IF NOT EXISTS Pessoa ( id INTEGER PRIMARY KEY, nome TEXT, idade INTEGER, horario TEXT, peso TEXT, altura TEXT, genero TEXT, tamanhomarmax TEXT, nacionalidade TEXT, local TEXT, experiencia INTEGER)') 
         res.json({
             "statusCode": 200
         })
@@ -28,7 +28,7 @@ export async function insertPessoa(req, res){
     let pessoa = req.body;
 
     openDb().then(db=>{
-        db.run('INSERT INTO Pessoa (nome, idade, horario) VALUES (?,?,?)', [pessoa.nome, pessoa.idade, pessoa.horario]);
+        db.run('INSERT INTO Pessoa (nome, idade, horario, peso, altura, genero, tamanhomarmax, nacionalidade, local, experiencia) VALUES (?,?,?,?,?,?,?,?,?,?)', [pessoa.nome, pessoa.idade, pessoa.horario, pessoa.peso, pessoa.altura, pessoa.genero, pessoa.tamanhomarmax, pessoa.nacionalidade, pessoa.local, pessoa.experiencia]);
     });
     res.json({
         "statusCode": 200
@@ -38,7 +38,7 @@ export async function insertPessoa(req, res){
 export async function updatePessoa(req, res){
     let pessoa = req.body;
     openDb().then(db=>{
-        db.run('UPDATE Pessoa SET nome=?, idade=?, horario=? WHERE id=?', [pessoa.nome, pessoa.idade, pessoa.horario, pessoa.id]);
+        db.run('UPDATE Pessoa SET nome=?, idade=?, horario=?, peso=?, altura=?, genero=?, tamanhomarmax=?, nacionalidade=?, local=?, experiencia=?, WHERE id=?', [pessoa.nome, pessoa.idade, pessoa.horario, pessoa.peso, pessoa.altura, pessoa.genero, pessoa.tamanhomarmax, pessoa.nacionalidade, pessoa.local, pessoa.experiencia, pessoa.id]);
     });
     res.json({
         "statusCode": 200
